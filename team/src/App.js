@@ -1,34 +1,35 @@
-import FormList from "./components/FormList";
-import Form from "./components/Form";
-import React, {useState} from "react";
-import styled from "styled-components";
+import React, {useState, useEffect} from 'react';
+import './App.css';
+import data from './data'
+import MembersList from './components/MembersList'
+import Form from './components/Form'
+import logo from "./logo.svg";
 
-const AppDiv = styled.div`
-width: 800px;
-margin: 0 auto;
-display: flex;
-flex-direction:column;
-align-items: center;
-`
+function App() {
 
+  const [members, setMembers] = useState([])
 
-function App(){
+  useEffect(()=>{
+    setMembers(data)
+  }, [])
 
-  const[members, setMembers] = useState([
-    {},
-    {}
-  ]);
+  const addTeamMate = mate=>{
+      const newMate = setMembers([...members, mate ])
+  }
 
-  console.log(members);
-
-  return(
-  <AppDiv className="App">
-    <h1>Add Team Member</h1>
-
-    <Form members={members} setMembers={setMembers} />
-    <FormList members={members} />
-
-  </AppDiv>
-  )};
+  return (
+    <div className="App">
+      <img src ={logo} alt="construction"/>
+      <h1>Team members</h1>
+      
+      <Form addTeamMate={addTeamMate}/>
+      <div className = "mainWrapper">
+      {members.map(member=>{
+        return <MembersList key={member.id} info={member} />
+      })}
+    </div>
+    </div>
+  );
+}
 
 export default App;

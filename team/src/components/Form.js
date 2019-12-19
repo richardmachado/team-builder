@@ -1,67 +1,43 @@
-import React, {useState} from "react";
+import React, { useState } from 'react'
 
-function Form(props){
-    const [newMember, SetNewMember] = useState({
-        memberName: "",
-        email: "",
-        role: ""
-    });
-   
-    const handleChange = e => {
-        SetNewMember({
-         ...newMember,   
-         [e.target.name]: e.target.value
-        })
-    }
+const Form = props=>{
+const [member, setMember] = useState({
+    name: '',
+    id: '',
+    role: ''
+})
 
-    const handleSubmit = e =>{
-        e.preventDefault();
-        props.setMembers([...props.members, newMember])
-        resetsForm(e);
-    }
-   
-    const resetsForm = e =>{
-        e.preventDefault();
-        SetNewMember({
-            memberName: "",
-            email:"",
-            role: ""
-        })
-    }
+const handleChanges = e =>{
+    setMember({...member, [e.target.name]: e.target.value})
+}
 
-    return(
+const submitHandler = e =>{
+    e.preventDefault()
+    const newMate = {
+        ...member,
+        id: Date.now(),
+    }
+    props.addTeamMate(newMate)
+    setMember({ name: "", email: "", role: "" });
+}
+    return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    onChange={handleChange}
-                    type="text"
-                    name="memberName"
-                    id=""
-                    value={newMember.memberName}
-                    placeholder="first and last name">
-                </input>
-                <input
-                    onChange={handleChange}
-                    type="text"
-                    name="email"
-                    id=""
-                    value={newMember.email}
-                    placeholder="email">
-                </input>
-                <input
-                    onChange={handleChange}
-                    type="text"
-                    name="role"
-                    id=""
-                    value={newMember.role}
-                    placeholder="role">
-                </input>
-
-                <button type="submit">submit</button>
-
+            <form onSubmit={submitHandler}>
+                <label htmlFor="name">Member's Name: </label>
+                <input onChange={handleChanges} id="name" name="name" value={member.name} type="text" placeholder="Name"></input>
+                <br></br>
+               
+                <label htmlFor="email">Member's Email: </label>
+                <input onChange={handleChanges} id="email" name="email" value={member.email} type="text" placeholder="Email"></input>
+                <br></br>
+               
+                <label htmlFor="role">Member's Position</label>
+                <input onChange={handleChanges} id="role" name="role" value={member.role} type="text" placeholder="Position"></input>
+                <br></br>
+               
+                <button type="submit">Add Team Member</button>
             </form>
         </div>
     )
 }
-
-export default Form;
+export default Form
