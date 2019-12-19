@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+}
+
+img {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: dodgerblue;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+body {
+  background-color: rgb(40, 121, 208);
+}
+
+.membercard {
+border: solid black 4px;
+width: 30rem;
+}
+.mainWrapper {
+ 
+  flex-wrap: wrap;
+}
+img {
+width: 20rem;
+height:20rem;
+}
